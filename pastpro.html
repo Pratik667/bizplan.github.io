@@ -1,0 +1,117 @@
+<?php require('conn.php');
+session_start(); 
+?>
+<div class="row">
+    <div class="col-lg-6">   
+    <h4>Past Performance</h4>
+
+    <form method="POST" action="pastpro.php">
+        <h4>Basic Information Previous Year - 2017</h4>        
+        <label for="revenue">Revenue</label>  <input type ="number" class="form-control" id="revenue"  onchange="myFunction()" /> 
+        <label for="profit"> Net-Profit</label>  <input type ="number" class="form-control" id="profit" onchange="myFunction()"/>
+        <label for="balance">Cash-Balance</label>  <input type ="number" class="form-control" id="balance" onchange="myFunction()"/>
+        <label for="debt"> Debt</label>  <input type ="number" class="form-control" id="debt" onchange="myFunction()"/>        
+        <br/><br/>
+        <h4>Basic Information Previous Year - 2018</h4>        
+        <label for="revenue"> Revenue</label> <input type ="number" class="form-control" id="revenueo" onchange="myFunction1()" />
+        <label for="profit">Net-Profit</label> <input type ="number" class="form-control" id="profito" onchange="myFunction1()" />
+        <label for="balance">Cash-Balance</label> <input type ="number" class="form-control" id="balanceo" onchange="myFunction1()" />
+        <label for="debt">Debt</label> <input type ="number" class="form-control" id="debto" onchange="myFunction1()" />        
+    </form>
+    
+    </div>
+    <div class="col-lg-6">  
+        <div class="row">
+        <div id="chartContainer" style="height: 50%; width: 50%;"></div>
+        <div id="chartContainer1" style="height: 50%; width: 50%;"></div>
+        </div>
+    </div>
+</div>
+<!--------------------------------------------------------------------------------------->
+<script>
+function setCookie(cname, cvalue, exdays) {
+  
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";";
+}
+
+
+</script>
+<!--------------------------------------------------------------------------------------->
+<script> 
+var bar = 0;
+function mouseUp() {
+    myFunction2();
+}
+   function myFunction(){    
+    
+/**************************************************************************** */   
+        var revenue=document.getElementById('revenue').value;  setCookie("revenue",revenue,180); 
+
+              var profit=document.getElementById('profit').value;  setCookie("profit",profit,180);
+       var balance=document.getElementById('balance').value;    setCookie("balance",balance,180);
+       var debt=document.getElementById('debt').value;  setCookie("debt",debt,180);
+
+
+        var chart = new CanvasJS.Chart("chartContainer",{
+		title:{
+			text: "Basic Information Previous Year - 2017"
+		},
+		legend: {
+			maxWidth: 350,
+			itemWidth: 120
+		},
+		data: [
+		{
+			type: "pie",
+			showInLegend: true,
+			legendText: "{indexLabel}",
+			dataPoints: [
+				{ y: revenue, indexLabel: "Revenue" },
+				{ y: profit, indexLabel: "Net-Profit" },
+				{ y: balance, indexLabel: "Cash-Balance" },
+				{ y: debt, indexLabel: "Debt"},
+				]
+		}
+		]	});
+        chart.render(); 
+        bar = 1; 
+   }
+   function myFunction1(){   
+/*<------------------------------------------------------------------->*/
+var revenueo=document.getElementById('revenueo').value;     setCookie("revenueo",revenueo,180);
+       var profito=document.getElementById('profito').value;    setCookie("profito",profito,180);
+       var balanceo=document.getElementById('balanceo').value;      setCookie("balanceo",balanceo,180);
+       var debto=document.getElementById('debto').value;    setCookie("debto",debto,180);
+var chart1 = new CanvasJS.Chart("chartContainer1",{
+		title:{
+			text: "Basic Information Previous Year - 2018"
+		},
+		legend: {
+			maxWidth: 350,
+			itemWidth: 120
+		},
+		data: [
+		{
+			type: "pie",
+			showInLegend: true,
+			legendText: "{indexLabel}",
+			dataPoints: [
+				{ y: revenueo, indexLabel: "Revenue" },
+				{ y: profito, indexLabel: "Net-Profit" },
+				{ y: balanceo, indexLabel: "Cash-Balance" },
+				{ y: debto, indexLabel: "Debt"},
+				]
+		}
+        ]	});
+      
+    chart1.render(); 
+        bar = 2;
+           }    
+           
+if(bar==2){
+    myFunction2();
+}      
+           </script>

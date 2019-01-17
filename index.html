@@ -1,145 +1,71 @@
-
 <!DOCTYPE html>
 <html>
-<head>
-
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Business Plan</title>
-    <script  src="https://code.jquery.com/jquery-3.3.1.js"
-  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-  crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-
+<title>Business Plan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <style>
 body{
-    background : #fff200;
-    margin : 2%;
-    font-size : 2vw;
+    font-size : 22px;
 }
-h1{
-	background : #18dcff;
-	border : 1px dotted black;
-}
-h4{
-	background : #7158e2;
-	color : white;
-}
-
-
 </style>
-</head>
 <body>
 
-    <div class="row">
-    <div class="col-lg-6">
-    <h1>Business Plan - Generator</h1>
-    <form method="POST" action="display.php">
-        <h4>Basic Information Previous Year - 2017</h4>
-        <table>
-        <tr><td> Revenue </td> <td><input type ="number" id="revenue"  onchange="myFunction()" /></td> </tr>
-        <tr><td> Net-Profit</td> <td><input type ="number" id="profit" onchange="myFunction()"/></td></tr>
-        <tr><td>Cash-Balance</td> <td><input type ="number" id="balance" onchange="myFunction()"/></td></tr>
-        <tr><td> Debt</td> <td><input type ="number" id="debt" onchange="myFunction()"/></td></tr>
-        </table>
-        <br/><br/>
-        <h4>Basic Information Previous Year - 2018</h4>
-        <table>
-        <tr><td> Revenue</td> <td><input type ="number" id="revenueo" onchange="myFunction1()" /></td></tr>
-        <tr><td>Net-Profit</td> <td><input type ="number" id="profito" onchange="myFunction1()" /></td></tr>
-        <tr><td>Cash-Balance</td> <td><input type ="number" id="balanceo" onchange="myFunction1()" /></td></tr>
-        <tr><td> Debt</td> <td><input type ="number" id="debto" onchange="myFunction1()" /></td></tr>
-        </table>
-    </form>
+<div class="w3-container">
+
+
+  <div class="w3-row">
+    <a href="javascript:void(0)" onclick="openCity(event, 'London');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Past Performance</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openCity(event, 'Paris');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Company Information</div>
+    </a>
+    <a href="javascript:void(0)" onclick="openCity(event, 'Tokyo');">
+      <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Owners Information</div>
+    </a>
+  </div>
+
+  <div id="London" class="w3-container city" style="display:none">
+  <?php require('pastpro.php'); ?> <br/>
+  <input type="button" class="btn btn-success" onclick="openCity(event, 'Paris');" value="Next"/>
     
-    </div>
-    <div class="col-lg-6" onmouseup="mouseUp()">  
-<div class="row">
-<div id="chartContainer" style="height: 50%; width: 50%;"></div>
-<div id="chartContainer1" style="height: 50%; width: 50%;"></div>
+  </div>
+
+  <div id="Paris" class="w3-container city" style="display:none">
+  <?php require('compinfo.php'); ?>
+  <input type="button" class="btn btn-danger" onclick="openCity(event, 'London');" value="Previous"/>
+  <input type="button" class="btn btn-success" onclick="openCity(event, 'Tokyo');" value="Next"/>
+  
+   </div>
+
+  <div id="Tokyo" class="w3-container city" style="display:none">
+  <?php require('owninfo.php'); ?>
+  <input type="button" class="btn btn-danger" onclick="openCity(event, 'Paris');" value="Previous"/>
+  
+  </div>
 </div>
-<div id="chartContainer2" style="margin-top:55% ; height: 45%; width: 100%;"></div>
-<script> 
-var bar = 0;
 
-function mouseUp() {
-    myFunction2();
+<script>
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" w3-border-red", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.firstElementChild.className += " w3-border-red";
 }
-   function myFunction(){    
-    
-/**************************************************************************** */   
-        var revenue=document.getElementById('revenue').value;
-       var profit=document.getElementById('profit').value;
-       var balance=document.getElementById('balance').value;
-       var debt=document.getElementById('debt').value; 
-   
-        var chart = new CanvasJS.Chart("chartContainer",{
-		title:{
-			text: "Basic Information Previous Year - 2017"
-		},
-		legend: {
-			maxWidth: 350,
-			itemWidth: 120
-		},
-		data: [
-		{
-			type: "pie",
-			showInLegend: true,
-			legendText: "{indexLabel}",
-			dataPoints: [
-				{ y: revenue, indexLabel: "Revenue" },
-				{ y: profit, indexLabel: "Net-Profit" },
-				{ y: balance, indexLabel: "Cash-Balance" },
-				{ y: debt, indexLabel: "Debt"},
-				]
-		}
-		]	});
-        chart.render(); 
-        bar = 1; 
-   }
-   function myFunction1(){   
-/*<------------------------------------------------------------------->*/
-var revenueo=document.getElementById('revenueo').value;
-       var profito=document.getElementById('profito').value;
-       var balanceo=document.getElementById('balanceo').value;
-       var debto=document.getElementById('debto').value;  
-var chart1 = new CanvasJS.Chart("chartContainer1",{
-		title:{
-			text: "Basic Information Previous Year - 2018"
-		},
-		legend: {
-			maxWidth: 350,
-			itemWidth: 120
-		},
-		data: [
-		{
-			type: "pie",
-			showInLegend: true,
-			legendText: "{indexLabel}",
-			dataPoints: [
-				{ y: revenueo, indexLabel: "Revenue" },
-				{ y: profito, indexLabel: "Net-Profit" },
-				{ y: balanceo, indexLabel: "Cash-Balance" },
-				{ y: debto, indexLabel: "Debt"},
-				]
-		}
-        ]	});
-      
-    chart1.render(); 
-        bar = 2;
-           }    
-           
-if(bar==2){
-    myFunction2();
-}      
-           </script>
-
-
+</script>
 
 </body>
 </html>

@@ -1,0 +1,146 @@
+
+    <div class="container-fluid">      
+       <div class="row">
+       <div class="col-lg-6">       
+          <form method="POST" action="bplanprocess.php">
+           <h4>Owners Information</h4>
+             <div class="form row">
+                  <div class="form-group col-md-6">
+                    <label for="fname">First Name</label>
+                <input type="text" class="form-control" id="fname" onchange="firstname()"placeholder="First Name">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="lname">Last Name</label>
+                    <input type="text" class="form-control" id="lname" onchange="lastname()" name="lname"placeholder="Last Name">
+                  </div>
+             </div>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="inputAddress">Address</label>
+                  <textarea class="form-control" rows="3" id="inputAddress" onchange="address()" placeholder="Room No, Street Lane, Area,City ,State"></textarea>
+                </div>
+              </div>  
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+        <label for="education">Highest Qualification</label>
+          <select class="form-control" id="education" onchange="edu()">
+            <option>--Select--</option>
+            <option>Post-Graduate</option>
+            <option>Graduate</option>
+            <option>BSC</option>
+            <option>HSC</option>
+            <option>SSC</option>
+            <option>Below SSC</option>
+            <option>other</option>
+          </select>
+          </div>
+        
+          <div class="form-group col-md-6">
+              <label class="control-label" for="sdate">Start Date Of Business</label>
+              <input class="form-control"  id="sdate" onchange="dates()" type="date"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="inputSummary">Summary</label>
+            <textarea class="form-control" rows="3" id="inputSummary" onchange="summary()" placeholder="Summary about the Owner"></textarea>
+          </div>
+        </div>       
+      <input type="submit" class="btn btn-info" name="submit"value="save"/>
+      </form>
+</div>
+
+<div class="col-lg-6" class="preview">
+<center>
+ <b> <label id="first" name="first"></label> 
+  <label id="second" name="second"></label></b> <br/>
+  <label id="addr" name="addr"></label> <br/>
+  <label id="educ" name="addr"></label> <br/>
+  <label id="startdate" name="addr"></label> <br/>
+  <label id="summary" name="addr"></label>
+</center>
+</div>
+
+  </div>
+<script>
+ 
+  // See if we have an autosave value
+  // (this will only happen if the page is accidentally refreshed)
+  if (sessionStorage.getItem("firstname")) {    // Restore the contents of the text field
+    fname.value = sessionStorage.getItem("firstname");  }
+  if (sessionStorage.getItem("lname")) {    lname.value = sessionStorage.getItem("lname");  }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+  // Listen for changes in the text field
+  fname.addEventListener("change", function() {
+    // And save the results into the session storage object
+    sessionStorage.setItem("firstname", fname.value);   
+  });
+  lname.addEventListener("change", function() {    sessionStorage.setItem("lname", lname.value);     });
+
+
+  </script>
+<!--------------------------------------------------------------------------------------->
+<script>
+function setCookie(cname, cvalue, exdays) {
+  
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+</script>
+<!--------------------------------------------------------------------------------------->
+<!------------------------------>
+<script type="text/javascript">
+  function firstname(){
+    var fname = document.getElementById("fname"); 
+    document.getElementById("first").innerHTML =""+fname.value;   
+    setCookie("fname",fname.value,180); 
+                      
+  }
+  function lastname(){
+    var lname = document.getElementById("lname");
+    document.getElementById("second").innerHTML =""+lname.value;
+    setCookie("lname",lname.value,180);
+  }
+  function address(){
+    var addr = document.getElementById("inputAddress");
+    document.getElementById("addr").innerHTML = ""+addr.value;
+    setCookie("addr",addr.value,180);
+  }
+  function edu(){
+    var educ = document.getElementById("education");
+    document.getElementById("educ").innerHTML = "Qualification: "+educ.value;
+    setCookie("educ",educ.value,180);
+  }
+  function dates(){
+    var strtdate = document.getElementById("sdate");
+    document.getElementById("startdate").innerHTML = "Start Date of Business: "+strtdate.value;
+    setCookie("strtdate",strtdate.value,180);
+  }
+  function summary(){
+    var summ = document.getElementById("inputSummary");
+    document.getElementById("summary").innerHTML = "About Owner: "+summ.value;
+    setCookie("summary",summ.value,180);
+  }
+</script>
