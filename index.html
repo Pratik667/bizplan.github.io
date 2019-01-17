@@ -32,20 +32,20 @@ body{
   </div>
 
   <div id="London" class="w3-container city" style="display:none">
-  <?php require('pastpro.php'); ?> <br/>
+  <?php require('pastpro.html'); ?> <br/>
   <input type="button" class="btn btn-success" onclick="openCity(event, 'Paris');" value="Next"/>
     
   </div>
 
   <div id="Paris" class="w3-container city" style="display:none">
-  <?php require('compinfo.php'); ?>
+  <?php require('compinfo.html'); ?>
   <input type="button" class="btn btn-danger" onclick="openCity(event, 'London');" value="Previous"/>
   <input type="button" class="btn btn-success" onclick="openCity(event, 'Tokyo');" value="Next"/>
   
    </div>
 
   <div id="Tokyo" class="w3-container city" style="display:none">
-  <?php require('owninfo.php'); ?>
+  <?php require('owninfo.html'); ?>
   <input type="button" class="btn btn-danger" onclick="openCity(event, 'Paris');" value="Previous"/>
   
   </div>
